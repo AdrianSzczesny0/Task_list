@@ -1,0 +1,132 @@
+
+div.header_grid{
+    display: grid;
+    grid-template-columns: 20% auto 20%;
+    grid-gap: 20px;
+    padding:10px;
+    padding-bottom:0px;
+
+
+}
+div.grid_container{
+    display: grid;
+    grid-template-columns: 20% auto 20%;
+    grid-gap: 20px;
+    padding:10px;
+    padding-bottom:0px;
+}
+*.head_section{
+    text-align: center;
+    /* background-color: rgb(255, 255, 255); */
+    position: absolute;
+    position: static;
+    grid-column-end: span 3;
+    
+}
+li{
+    text-align: center;
+    list-style-type: none;
+    height: 50px;
+    padding-bottom: 10px;
+    /* background-color: rgb(205, 205, 205); */
+
+}
+li:nth-child(odd){
+    /* background-color: rgb(172, 172, 172); */
+}
+ul{
+    padding-left: 0px;
+    overflow: scroll;
+}
+div .main{
+    /* background-color: red; */
+    overflow: scroll;
+    height:75vh;
+    min-width: 20vh;
+    grid-column-end: span 3;
+    grid-gap: 0px;
+    width:100%;
+    padding-left:0px;
+
+
+}
+*.sub_grid{
+    display: grid;
+    grid-template-columns: auto auto auto;
+    grid-template-rows: auto auto auto;
+    grid-gap: 10px;
+    padding: 10px;
+    width:100%;
+}
+*.title{
+    grid-column-end: span 3;
+}
+*.add{
+    grid-column-end: span 3;
+}
+*.add > input {
+    width:80%;
+    height:36px;
+}
+*.add > span {
+    height: 30px;
+    background-color: rgb(144, 137, 150);
+    width: 50px;
+    height: 40px;
+    display: inline-block;
+    vertical-align: middle;
+    /* text-align: center; */
+    align-items: center;
+    display: inline-flex;
+    justify-content:center;
+}
+
+*.addBtn:hover{
+    background-color: rgb(0, 255, 106);
+    cursor:pointer;
+}
+*.item_grid{
+    display: grid;
+    grid-template-columns: auto 80px;
+    text-align: center;
+}
+
+.item_name{
+    background-color: rgb(238, 229, 229);
+    align-items: center;
+    display: inline-flex;
+    justify-content:left;
+    padding-left: 30px;
+    border-radius: 3px 0px 0px 3px;
+    padding-bottom: 10px;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+
+}
+.item_name.Finished{
+    background-color: rgba(0, 255, 64, 0.5);
+    align-items: center;
+    display: inline-flex;
+    justify-content:left;
+    padding-left: 30px;
+}
+
+.item_button{
+    background-color: rgb(144, 137, 150);
+    align-items: center;
+    display: inline-flex;
+    justify-content:center;
+    padding-right: 0px;
+}
+.item_button:hover{
+    background-color: red;
+}
+.Finished{
+    /* background-color: rgba(56, 222, 56, 0.9); */
+    text-decoration: line-through;
+    color:rgb(131, 127, 127);
+    transform: translate(10px,0px);
+    transition: 0.2s;
+}
+.ToDo{
+    transition: 0.2s;
+}
