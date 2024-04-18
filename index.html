@@ -7,7 +7,8 @@
     <title>Document</title>
 </head>
 <body>
-    <div class="header_grid">
+    <div class="wrapper">
+        <div class="header_grid">
             <div class="head_section">
                 <div class="sub_grid">
                     <div class="title">To do list:</div>
@@ -18,22 +19,26 @@
                     <div></div>
                 </div>
             </div>
-    </div>
-    <div id="main" class="grid_container">
-        <div class="main">
-            <div class="list_section">
-                <ul id="list">
-                </ul>
+        </div>
+        <div class="break"></div>
+        <div class="header_grid">
+            <div class="main">
+                <div class="sub_grid">
+                    <ul id="list">
+
+                    </ul>
+                </div>
             </div>
         </div>
+
         <template id="item_template">
             <li class="item_grid ToDo">
                 <div class="item_name" id="item_name">name</div>
                 <div class="item_button" id="item_button">Delete</div>
             </li>
         </template>
-        
     </div>
+
     <script src="main.js"></script>
 </body>
 </html>
