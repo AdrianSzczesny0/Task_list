@@ -77,19 +77,10 @@ function addNewListItem(){
   }
 }
 
-
 addBtn.addEventListener('click', e => {
   addNewListItem();
 })
 
-
-var close = document.getElementsByClassName("item_button");
-var i;
-for (i = 0; i < close.length; i++) {
-  close[i].onclick = function() {
-    var div = this.parentElement;
-  }
-}
 
 document.body.addEventListener("keydown", (ev) =>{
   if(ev.key=='Enter'){
