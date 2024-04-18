@@ -6,49 +6,71 @@ const removeBtn = document.getElementsByClassName;
 const itemList = [];
 const notybar = document.getElementById("noty_bar");
 
-console.log(addBtn);
-
 
 // add new list item 
 function addNewListItem(){
   const toAddName = item_text.value;
   if (itemList.includes(toAddName) || toAddName==""){
-    console.log('item already in list');
     document.getElementById("itemName").value = "";
     createNotybar('fail','Item already exists');
   }else{
-    const firstItem = document.getElementsByClassName("")
-    const toAddName = item_text.value;
-    const clonedItem = item_template.content.cloneNode(true);
-    const clonedItemName = clonedItem.getElementById("item_name");
-    const delete_button = clonedItem.getElementById("item_button");
-    clonedItemName.innerHTML = toAddName;
-    clonedItemName.parentElement.classList.add('visible');
-    item_container.append(clonedItem);
+
+    // create elements needed for the list item
+    const listItemContainer = document.createElement('div');
+    const listItemNameWrapper = document.createElement('div');
+    const listItemButton = document.createElement('span');
+    const listItemLine = document.createElement('div');
+    const listItemName = document.createElement('span');
+
+    // add the listItem as child to UL
+    item_container.appendChild(listItemContainer);
+
+    // add correct item structure
+    listItemContainer.appendChild(listItemNameWrapper);
+    listItemContainer.appendChild(listItemButton);
+    listItemNameWrapper.appendChild(listItemName);
+    listItemNameWrapper.appendChild(listItemLine);
+
+    // add classes for styles to the list Item
+    listItemContainer.classList.add('item_grid');
+    listItemContainer.classList.add('ToDo');
+    listItemNameWrapper.classList.add('item_name');
+    listItemButton.classList.add('item_button');
+    listItemLine.classList.add('line');
+
+    // add correct text to list Item
+    listItemButton.innerHTML = "Delete";
+    listItemName.innerHTML = toAddName;
+
+    // clear the add item input
     document.getElementById("itemName").value = "";
-    delete_button.onclick = function() {
-      this.parentElement.remove();
+
+    // add the delete function to list item button
+    listItemButton.onclick = async function() {
+      listItemContainer.classList.add('deleted');
       for (let index = 0; index < itemList.length; index++) {
-        if (itemList[index] == clonedItemName.innerHTML){
+        if (itemList[index] == listItemName.innerHTML){
           itemList.splice(index,1);
         }
       }
+      await fadeout(listItemContainer);
     }
     createNotybar('success','Successfully added item');
 
-    // item check uncheck
-    clonedItemName.onclick = function() {
-      console.log('CLICKED');
-      if (clonedItemName.parentElement.classList.contains('Finished')){
-        clonedItemName.parentElement.classList.remove('Finished');
-        clonedItemName.parentElement.classList.add('ToDo');
-        clonedItemName.classList.remove('Finished');
-        clonedItemName.classList.add('ToDo');
-      }else if (clonedItemName.parentElement.classList.contains('ToDo')) {
-        clonedItemName.parentElement.classList.remove('ToDo');
-        clonedItemName.parentElement.classList.add('Finished');
-        clonedItemName.classList.remove('ToDo');
-        clonedItemName.classList.add('Finished');
+    // add check uncheck function to list item
+    listItemNameWrapper.onclick = function() {
+      if (listItemNameWrapper.parentElement.classList.contains('Finished')){
+        listItemNameWrapper.parentElement.classList.remove('Finished');
+        listItemNameWrapper.parentElement.classList.add('ToDo');
+        listItemNameWrapper.classList.remove('Finished');
+        listItemNameWrapper.classList.add('ToDo');
+        listItemLine.style.opacity=0;
+      }else if (listItemNameWrapper.parentElement.classList.contains('ToDo')) {
+        listItemNameWrapper.parentElement.classList.remove('ToDo');
+        listItemNameWrapper.parentElement.classList.add('Finished');
+        listItemNameWrapper.classList.remove('ToDo');
+        listItemNameWrapper.classList.add('Finished');
+        listItemLine.style.opacity=1;
       }
     }
     itemList.push(toAddName);
@@ -58,16 +80,12 @@ function addNewListItem(){
 
 addBtn.addEventListener('click', e => {
   addNewListItem();
-  console.log(itemList);  
-
 })
 
 
 var close = document.getElementsByClassName("item_button");
-console.log(close);
 var i;
 for (i = 0; i < close.length; i++) {
-  console.log(close[i]);
   close[i].onclick = function() {
     var div = this.parentElement;
   }
@@ -81,7 +99,6 @@ document.body.addEventListener("keydown", (ev) =>{
 
 
 async function createNotybar(type,message){
-  console.log('Creating notybar');
   const notyBar = document.createElement('div');
   const notyBarMessage = document.createElement('p');
   
@@ -100,7 +117,7 @@ async function createNotybar(type,message){
   await fadeIn(notyBar);
   await delay(1000);
   await fadeout(notyBar);
-  notyBar.remove();
+
 }
 
 async function fadeIn(element){
@@ -110,19 +127,13 @@ async function fadeIn(element){
   }
 }
 async function fadeout(element){
-  for (let index = 10; index <0; index--) {
-    await delay(20);
-    element.style.opacity = index/10;
+  for (let index = 10; index >0; index--) {
+    await delay(50);
+    element.style.opacity = index/20;
   }
+  element.remove();
 }
-
 
 function delay(time) {
   return new Promise(resolve => setTimeout(resolve, time));
-}
-
-async function test() {
-  console.log('start timer');
-  await delay(1000);
-  console.log('after 1 second');
 }
