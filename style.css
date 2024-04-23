@@ -6,6 +6,7 @@ div.header_grid{
     padding:10px;
     padding-bottom:0px;
     justify-content: center;
+    padding-top:30px;
 
 }
 div.grid_container{
@@ -183,10 +184,12 @@ div .main{
     transform: scaleY(0);
 }
 .amountLeft{
-    color:antiquewhite;
+    color:rgb(75, 75, 75);
 }
 .leftToDo{
     display: flex;
-    padding-bottom: -10px;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top:12px;
     height: 0px;
 }

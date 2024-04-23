@@ -5,8 +5,16 @@ const item_text = document.getElementById("itemName");
 const removeBtn = document.getElementsByClassName;
 const itemList = [];
 const notybar = document.getElementById("noty_bar");
-const currentAmount = document.getElementById("currentAount");
-const maxAmount = document.getElementById("maxAmount");
+const toDo = document.getElementById("toDo");
+const amount = {
+  toDo:0,
+  finished:0,
+  max:0
+}
+function updateToDoAmount(){
+  amount.max= itemList.length;
+  toDo.innerHTML = `Items amount to finish: ${amount.toDo} : ${amount.max}`;
+}
 
 // add new list item 
 function addNewListItem(){
@@ -48,16 +56,21 @@ function addNewListItem(){
 
     // add the delete function to list item button
     listItemButton.onclick = async function() {
+      if (listItemButton.parentElement.classList.contains('Finished')){
+        amount.toDo++;
+      }
       listItemContainer.classList.add('deleted');
       for (let index = 0; index < itemList.length; index++) {
         if (itemList[index] == listItemName.innerHTML){
           itemList.splice(index,1);
+          amount.toDo--;
         }
       }
       await fadeout(listItemContainer);
+      updateToDoAmount();
     }
+    amount.toDo++;
     createNotybar('success','Successfully added item');
-
     // add check uncheck function to list item
     listItemNameWrapper.onclick = function() {
       if (listItemNameWrapper.parentElement.classList.contains('Finished')){
@@ -66,22 +79,20 @@ function addNewListItem(){
         listItemNameWrapper.classList.remove('Finished');
         listItemNameWrapper.classList.add('ToDo');
         listItemLine.style.opacity=0;
+        amount.toDo++;
+        updateToDoAmount();
       }else if (listItemNameWrapper.parentElement.classList.contains('ToDo')) {
         listItemNameWrapper.parentElement.classList.remove('ToDo');
         listItemNameWrapper.parentElement.classList.add('Finished');
         listItemNameWrapper.classList.remove('ToDo');
         listItemNameWrapper.classList.add('Finished');
         listItemLine.style.opacity=1;
+        amount.toDo--;
+        updateToDoAmount();
       }
     }
     itemList.push(toAddName);
-    
-    itemList.forEach(element => {
-      if (element === toAddName){
-        console.log(element);
-        toAddName
-      }
-    });
+    updateToDoAmount();
   }
 }
 
