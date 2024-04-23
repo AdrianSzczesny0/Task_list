@@ -5,7 +5,8 @@ const item_text = document.getElementById("itemName");
 const removeBtn = document.getElementsByClassName;
 const itemList = [];
 const notybar = document.getElementById("noty_bar");
-
+const currentAmount = document.getElementById("currentAount");
+const maxAmount = document.getElementById("maxAmount");
 
 // add new list item 
 function addNewListItem(){
@@ -74,6 +75,13 @@ function addNewListItem(){
       }
     }
     itemList.push(toAddName);
+    
+    itemList.forEach(element => {
+      if (element === toAddName){
+        console.log(element);
+        toAddName
+      }
+    });
   }
 }
 
